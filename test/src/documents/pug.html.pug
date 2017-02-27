@@ -1,0 +1,11 @@
+h1 Pug Example
+
+ul
+	li Hello
+
+:t(render="html.md.eco")
+	<%-"eco".toUpperCase()%> to *markdown* to html. my url is <%-@document.url%>
+
+!= getBlock('meta').toHTML().replace(/v[0-9\.]+/, 'vXXX')
+
+!= getCollection('documents').pluck('url').join('<br/>')
