@@ -42,6 +42,20 @@ If you still insist on using Pug, please be aware, Pug will be a slippery slope,
 
 ## Usage
 
+``` pug
+---
+title: "Pug Example"
+---
+
+h1= document.title
+
+ul
+	each page in getCollection("html").findAll({isPage:true}).toJSON()
+		li(class!=page.id === document.id ? 'active' : 'inactive')
+			a(href=page.url)
+				= page.title
+```
+
 ### Template Helpers as Filters
 
 Use just like any pug template. However, we do add any docpad template helpers you may have as pug filters. There are two ways you can use these filters:
