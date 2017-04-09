@@ -1,6 +1,6 @@
 {
   "name": "docpad-plugin-pug",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Adds support for the Pug templating engine to DocPad.",
   "homepage": "https://github.com/docpad/docpad-plugin-pug",
   "license": "MIT",
