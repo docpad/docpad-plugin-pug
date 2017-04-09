@@ -1,24 +1,25 @@
-# February 19, 2015
-# https://github.com/bevry/base
+sudo: false
 language: node_js
-# ensure npm is the latest version (ignore node versions that can't run it)
-# ensure coffee-script is installed (needed for cake commands)
-# ensure dev dependencies are installed (handled via npm install)
-# ensure test dependencies are installed (handled via cake install)
-install: "npm install -g npm && npm install coffee-script && npm install && ./node_modules/.bin/cake install"
-# ensure our application is compiled before we run our tests
-before_script: "./node_modules/.bin/cake compile"
-script: "npm test"
 node_js:
-  - "0.10"
-  - "0.12"
-  - iojs
+- '0.12'
+- '4'
+- '6'
+- '7'
+matrix:
+  fast_finish: true
 cache:
   directories:
-    - node_modules
+  - "$HOME/.npm"
+  - "$HOME/.yarn-cache"
+install:
+- eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-install.bash)"
+before_script:
+- eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-verify.bash)"
+after_success:
+- eval "$(curl -s https://raw.githubusercontent.com/balupton/awesome-travis/master/scripts/node-publish.bash)"
 notifications:
-  irc:
-    - "irc.freenode.org#bevry-dev"
+  slack:
+    secure: InyqIPCJM1pfMTFTe2TVbZ3at27IUvG94ydicej1AKkRiVONhLGUdFf3c/deOUGYiREGh1M1p8Fd1LBRJgm9lAfq/km0RIydBT5r5FJdbvm69U49oDEkBWrPT3JKkzhvop4oP+Rwt/Kqck15fafNLry5CgSJoknvIxGibti+YR2QE8POZh7Whf3XrmkB9ownoZiAAO3hHVY5WHid9csNK24BfTYdfvyor4ge/FHFDfgJXJPIuvhVGvoOaT5Hn27o/YWhDvP6ShfQn3Zh+GejxS7xiRv0LQ1jtjLC1B7JXhM3WHwjEwjloHawkDry396NeIf1zhoBJ/s7DwMMEhUoojgJyVy8bur0IHSN7WFmKyK7gUV9SKEJn+E0aL9/WLtYY49sjBYOE6qMUoQNAYBpPk1XPbBgU0lU5hP4xXrw7/gSWTKyKmV4yIM+Zvb2quUlxxOJ3vuZspOZ2yVPFsfQm0UoAjh9wGeP0jFrrco0ztPN8IFzAFH688MqnjhW7KHaF2Wapem1DOGJMmc7+iD0MGuTAwfinRDF6WP4XXBBnVwJJ4EMkjDkQpO6yIbA0z+xBXKTGDg5SGx/j2PrGsQXShmYj8wtyaMmlVQ1gppMgh3FK41YcJ9gwUW954EWFy/Egh1EnbY2oneZ22RRFQHqJZp7fgspIVNNNufwE7AT45s=
   email:
     recipients:
-      - travisci@bevry.me
+      secure: TCAn3W5zwlQKMPq0DH2+eqFQ/6brqvzR7Lwj5b787D2/1L31CL0e1Neb1pS9vkLLePoj8896SvKLWxOCUXvzhI5W0UpsuvP4U766B2TK456tp5Ob59d6a6VE1WlMThbzmFXvqZrt/p1MedXtACgvt4X3ChYnzNWPr3X/hCm1Yj8zELhqrxEehfFYjk6p2umHdf1yE0BAawYKm6fapIHFY8v3X3tTcvEac7SFvozDtaJn3eY43/ICBvVKu6mePwlU0dHo/9Jt1lMaIh8mGhrOJgOQ37lEh1P7VWbzzBJTtgu4y/chdYQ0vcr/TzPOCJRLXdCOAepTgorX6cU/AfAJn6kIpYTFLQsIoxGWprM0X4VVTNz/WV4tDJFgeY/F7io4t10eiSTtaUKh4Bb0Lovt+00du/sbcCBbhn6SYbYplX2/w1OKYteB/p5KrlRMtY9AVxuLrUcrmCI4bJsicXfnxZQRyYC0OHOnAlHIb5uVe7GK/NQDH1Oju3ncA3aZHEnPzbXJydtOLT/hwyQLRG5Rk3eqF8BDJUi0tztIDfz5sQGX59Snx7DY9h5ouPWXrJLnmCp1c8mVthHRVnTgdZDeXlTST5p+4oTwZX93ZIXZYKt1m03V1AIh2hvpiLcndMYbzH6ZfuHu9k+nYHgbgikpJgKnS7afPoXvQ17EYTydsJI=
