@@ -14,20 +14,10 @@ module.exports = (BasePlugin) ->
 					pugOptions:
 						pretty: true
 
-		# Constructor
-		constructor: ->
-			# Prepare
-			super
-
-			# Require Pug
-			@pug = require('pug')
-
-			# Chain
-			@
-
 		# Generate Before
 		generateBefore: ->
 			# Prepare
+			@pug = require('pug')
 			templateData = @docpad.getTemplateData()
 			filters = @pug.filters
 
